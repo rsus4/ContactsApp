@@ -2,10 +2,17 @@
 <html lang="en" >
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <title>Contact List</title>
   <link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css'>
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.1/animate.min.css'><link rel="stylesheet" href="css/style2.css">
+
+
+
 <style>
 #styletable {
   font-family: Arial, Helvetica, sans-serif;
@@ -34,19 +41,70 @@
 <body>
 <!-- partial:index.partial.html -->
 <div ng-app="contactList" ng-controller="nameAdderController as nameAdder">
-  <div class="container">
+  <div class="container" >
     <div class="row">
       <header class="col-md-offset-1 col-md-10">
-        <h1>My Contact List</h1>
-        <small>A simple Angular app to help you managing your contacts.</small>
+        <h1>My Contacts</h1>
+        <!-- <small>A simple Angular app to help you managing your contacts.</small> -->
         <hr>
       </header>
     </div>
 
-    <div class="row">
-      <div class="col-md-offset-1 col-md-3 module contact-builder">
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="exampleModalLongTitle" style=" text-align: center;">Edit {{contactName}}'s Contact</h4>
+        <!-- <h5>Edit {{contactName}}'s Contact</h5> -->
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" ng-submit="editContact()" ng-show="editing">
+        <!-- <h4>Edit {{contactName}}</h4>
+        <div class="form-group">
+            <input type="text" id="name" class="form-control" placeholder="Name" ng-model="nameBox" required>
+          </div>
+          <div class="form-group">
+            <input type="text" id="lastname" class="form-control" placeholder="Last Name" ng-model="lastnameBox">
+          </div>
+          <div class="form-group">
+            <input type="email" id="email" class="form-control" placeholder="Email" ng-model="emailBox">
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-default">Edit Contact</button>
+            <button ng-click="openEdit()" class="btn btn-default">Cancel</button>
+          </div> -->
+             <!-- <h4>Edit {{contactName}}'s Contact</h4> -->
+          <div class="form-group">
+            <input type="text" id="name" class="form-control" placeholder="Name" ng-model="nameBox" required>
+          </div>
+          <div class="form-group">
+            <input type="text" id="lastname" class="form-control" placeholder="Last Name" ng-model="lastnameBox">
+          </div>
+          <div class="form-group">
+            <input type="email" id="email" class="form-control" placeholder="Email" ng-model="emailBox">
+          </div>
+          <div class="form-group">
+            <button ng-click="editContact()" class="btn btn-default" data-dismiss="modal">Save</button>
+           <!--  <button ng-click="openEdit()" class="btn btn-default" data-dismiss="modal">Cancel</button> -->
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+      </div>
+    </div>
+  </div>
+</div>
 
-        <form class="form" ng-submit="addContact()" ng-hide="editing">
+    <div class="row">
+      <div class="col-md-offset-1 col-md-0 module contact-builder">
+
+
+
+        <!-- form class="form" ng-submit="addContact()" ng-hide="editing">
           <h4>New Contact</h4>
           <div class="form-group">
             <input type="text" id="name" class="form-control" placeholder="First Name" ng-model="nameBox" required>
@@ -61,9 +119,9 @@
             <button type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i>Add Contact</button>
             <button type="reset" class="btn btn-default">Reset</button>
           </div>
-        </form>
+        </form> -->
 
-        <form ng-submit="editContact()" ng-show="editing" class="animated flipInY">
+<!--         <form ng-submit="editContact()" ng-show="editing" class="animated flipInY">
           <h4>Edit {{contactName}}</h4>
           <div class="form-group">
             <input type="text" id="name" class="form-control" placeholder="Name" ng-model="nameBox" required>
@@ -73,16 +131,12 @@
           </div>
           <div class="form-group">
             <input type="email" id="email" class="form-control" placeholder="Email" ng-model="emailBox">
-          </div>
-          
-          <div class="form-group">
-            <input type="checkbox" id="fav" placeholder="Favorite" ng-model="favBox"> <i class="glyphicon glyphicon-heart"></i>Favorite</input>
-          </div>
-          <div class="form-group">
-            <button type="submit" class="btn btn-default">Edit Contact</button>
+          </div> -->
+         <!--  <div class="form-group">
+            <button type="submit" class="btn btn-default">Save Changes</button>
             <button ng-click="openEdit()" class="btn btn-default">Cancel</button>
           </div>
-        </form>
+        </form> -->
 
       </div>
       <div class="col-md-7 module contact-list">
@@ -90,9 +144,9 @@
           <div class="form-group">
             <input placeholder="Search Names" class="form-control" ng-model="filters.name"></input>
           </div>
-          <div class="form-group">
+          <!-- <div class="form-group">
             <input type="checkbox" ng-model="exactMatch"> Exact Match</input>
-          </div>
+          </div> -->
           <div class="form-group pull-right">
             <!-- <button type="button" class="btn btn-danger" ng-click="deleteAll()"><i class="glyphicon glyphicon-trash"></i> Delete All Contacts</button> -->
        <!--      <button ng-click="favToggle()" ng-model="favSort" ng-class="on" class="btn btn-default favorite-btn"><i class="glyphicon glyphicon-heart"></i> Show Favorites</button> -->
@@ -114,9 +168,14 @@
                 <td class="text-lowesrcase">{{ obj.lastname }}</td>
                 <td>{{obj.email}}</td>
                 <td class="text-right">
-                  <a href="#" ng-click="openEdit($index)"><i class="glyphicon glyphicon-pencil"></i></a>
+                 <!--  <a href="#" ng-click="openEdit($index)"><i class="glyphicon glyphicon-pencil"></i></a> -->
+
+                  <button href="#" ng-click="openEdit($index)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+  Edit 
+</button>
                   <!-- <a href="#" ng-click="favName($index)"><i class="glyphicon glyphicon-heart"></i></a> -->
                   <a href="#" ng-click="removeName($index)"><i class="glyphicon glyphicon-trash"></i></a>
+
                 </td>
               </tr>
             </tbody>
@@ -127,8 +186,18 @@
     </div>
   </div>
 </div>
+
+<!-- Button trigger modal -->
+<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+  Launch demo modal
+</button>
+ -->
+
 <!-- partial -->
   <script src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.2/angular.min.js'></script><script  src="js/script.js"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
 
 </body>
 </html>
