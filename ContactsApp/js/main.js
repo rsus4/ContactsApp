@@ -1,20 +1,14 @@
-const inputs = document.querySelectorAll(".input");
 
-
-function addcl(){
-	let parent = this.parentNode.parentNode;
-	parent.classList.add("focus");
-}
-
-function remcl(){
-	let parent = this.parentNode.parentNode;
-	if(this.value == ""){
-		parent.classList.remove("focus");
+function validate() {
+	var username=document.getElementById("username").value;
+	var password=document.getElementById("password").value;
+	if(username=="admin" && password=="admin"){
+		// alert("Login successful");
+		window.location = "https://example.com/";
+		// window.location.replace("https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_redirect_webpage");
+		return false;
+	}
+	else{
+		alert("Login failed. The correct Username is 'admin' and Password is also 'admin'")
 	}
 }
-
-
-inputs.forEach(input => {
-	input.addEventListener("focus", addcl);
-	input.addEventListener("blur", remcl);
-});
