@@ -32,6 +32,60 @@ small {
   color: #999;
 }
 
+
+.styleNavBar .navbar {
+    background: #3cb9b2;
+}
+
+
+.styleNavBar .nav {
+    background: #3cb9b2;
+}
+
+
+.styleNavBar .navbar .collapse {
+
+    justify-content: space-between;
+}
+
+
+.nav-link {
+    color: white;
+    font-family: 'Roboto' !important;
+    font-size: 15px !important;
+    padding-top: 10px;
+    padding-bottom: 10px !important;
+}
+
+.nav-link:hover{
+    background-color: white;
+    color:#3cb9b2;
+    border-radius: 0px;
+    /* padding-bottom: 15px !important; */
+}
+
+.nav-link.active{
+    background-color: white ;
+    color:#3cb9b2 ;
+    /* padding-bottom: 15px !important; */
+}
+.topMostHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    color: #7c7d81;
+}
+
+.topMost{
+  display: flex;
+  justify-content: space-between;
+}
+.logoImage {
+    max-width: 10%;
+}
+
+
 [class^=col-] {
   padding-top: 10px;
   padding-bottom: 10px;
@@ -67,7 +121,17 @@ small {
 .table-striped > tbody > tr:nth-of-type(odd).favorite .glyphicon-heart, .table-striped > tbody > tr:nth-of-type(even).favorite .glyphicon-heart {
   color: #EA5872;
 }
+.footer {
+   position: fixed;
+   left: 0;
+   bottom: 0;
+   width: 100%;
+   background-color: #2a9df4;
+   /*background-color: grey;*/
+   color: white;
+   text-align: center;
 
+}
 .favorite-btn .on .glyphicon-heart {
   color: #EA5872;
 }
